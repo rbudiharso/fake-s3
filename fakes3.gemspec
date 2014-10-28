@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "fakes3"
 
-  s.add_development_dependency "bundler", ">= 1.0.0"
+  s.add_development_dependency "bundler"
   s.add_development_dependency "aws-s3"
   s.add_development_dependency "right_aws"
   s.add_development_dependency "rest-client"

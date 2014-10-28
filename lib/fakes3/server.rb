@@ -1,5 +1,6 @@
 require 'time'
 require 'webrick'
+require 'webrick/https'
 require 'fakes3/file_store'
 require 'fakes3/xml_adapter'
 require 'fakes3/bucket_query'
@@ -377,7 +378,8 @@ module FakeS3
     end
 
     def serve
-      @server = WEBrick::HTTPServer.new(:BindAddress => @address, :Port => @port)
+      cert = [ %w[CN localhost] ]
+      @server = WEBrick::HTTPServer.new(:BindAddress => @address, :Port => @port, SSLEnable: true, SSLCertName: cert)
       @server.mount "/", Servlet, @store,@hostname
       trap "INT" do @server.shutdown end
       @server.start
